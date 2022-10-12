@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="ch">
+        <title>登录页面</title>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            body{
+                width:100%;
+                height:100%;
+                background-color: #B79B5B;
+            }
+            .container{
+                width:500px;
+                height:300px;
+                background-color: #B68D4C;
+                border:3px solid #96514d;
+                position:absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                margin:auto;
+                box-shadow: 0 0 30px 5px red;
+            }
+            .container .login-header{
+                width:100%;
+                height:30%;
+                font-size:30px;
+                box-sizing: border-box;
+                text-align:center;
+                line-height:90px;
+            }
+            .container .login-box{
+                width:100%;
+                height:25%;
+                border:1px solid #BF794E;
+            }
+            .container .login-box label{
+                width:25%;
+                float: left;
+                text-align:right;
+                font-size:25px;
+                box-sizing: border-box;
+                line-height: 75px;
+            }
+            .container .login-box .input{
+                width:75%;
+                float:right;
+                box-sizing: border-box;
+                padding-top:20px;
+            }
+            .container .login-box .input input{
+                width:90%;
+                height:30px;
+                background-color: #B79B5B;
+                border:black 2px solid;
+                font-size:15px;
+                box-sizing: border-box;
+                padding-left:5px;
+            }
+            .container .login-box .input input:focus{
+                border:black 2px solid;
+                outline:0;/*外轮廓*/
+            }
+            .container .login-submit{
+                width:100%;
+                height:20%;
+                text-align:center;
+                box-sizing: border-box;
+                line-height: 50px;
+            }
+            .container .login-submit button{
+                width:30%;
+                height:50%;
+                background-color: #B68D4C;
+                border-radius:8px;
+                font-size:20px;
+            }
+            .container .login-submit button:hover{
+                cursor:pointer;
+                background-color: #96514d;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="#" method="get" target="_self">
+            <div class="container">
+                <div class="login-header">清风系统登录界面</div>
+                <div class="login-box">
+                    <div class="label">
+                        <label for="username">用户名：</label>
+                    </div>
+                    <div class="input">
+                        <input id="username" type="text" name="username" placeholder="请输入账号">
+                    </div>
+                </div>
+                <div class="login-box">
+                    <div class="label">
+                        <label for="password">密码：</label>
+                    </div>
+                    <div class="input">
+                        <input id="password" type="password" name="password" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="login-submit">
+                    <button type="submit">登录</button>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
