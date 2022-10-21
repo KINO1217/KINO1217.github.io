@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--IE标识-->
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><!--禁用缩放功能-->
+        <title>摄像头调用</title>
+    </head>
+    <body>
+        <!--显示从摄像头获取的stream数据-->
+        <video id="media" autoplay style="width:500px;height:300px;"></video>
+        <button id="close">关闭摄像头</button>
+        <button id="capture">拍照</button>
+        <button id="change">调转摄像头</button>
+        <canvas id="canvas" width="300" height="200"></canvas>
+    </body>
+
+    <script>
+        window.onload=function(){
+
+            /*获取media元素显示获取的流*/
+            var display=document.querySelector('#media');
+            var closeBtn=document.querySelector('#close');
+            var mediaStreamTrack=null;
+            var capture=document.querySelector('#capture');
+            var canvas=document.querySelector('#canvas');
+            var context=canvas.getContext('2d');
+            var change=document.querySelector('#change');
+            var changeNum=0;
+
+            /*
+             * config 配置获取的媒体类型
+             * success 获取媒体成功的执行函数
+             * error 获取媒体失败的执行函数
+            */
+            function getUserMediaToImg(config,success,error){
+                if(navigator.mediaDevices.getUserMedia){
+                    navigator.mediaDevices.getUserMedia(config).then(success).catch(error);
+                }else if(navigator.getUserMedia){
+                    navigator.getUserMedia(config,success,error);
+                }
+            }
+
+            /**
+             * 获取媒体成功的执行函数
+             * stream 获取的数据流
+             */
+            function success(stream){
+                var diaplayUrl=window.URL||window.webkitURL;
+                try{
+                    display.src=diaplayUrl.createObjectURL(stream);
+                }catch (e){
+                    display.srcObject=stream;
+                }
+                mediaStreamTrack=stream.getTracks()[0];
+                display.play();
+            }
+
+            /**
+             * 获取媒体失败的执行函数
+             * message 失败信息
+             */
+            function error(message){
+                console.log(message);
+            }
+
+            getUserMediaToImg({video:{width:1260,height:700}},success,error);
+
+            /*关闭摄像头*/
+            closeBtn.onclick=function(){
+                mediaStreamTrack.stop();
+            }
+
+            /*拍照*/
+            capture.onclick=function(){
+                context.drawImage(display,0,0,300,200);
+            }
+
+            /*变换前后摄像头*/
+            change.onclick=function(){
+                mediaStreamTrack.stop();
+                if(changeNum%2!=0){
+                    getUserMediaToImg({video:{width:1260,height:700,facingMode:"user"}},success,error);
+                }else{
+                    //调用函数后置摄像头
+                    getUserMediaToImg({video:{width:1260,height:700,facingMode:{exact:"environment"}}},success,error);
+                }
+                changeNum++;
+            }
+        }
+    </script>
+</html>
