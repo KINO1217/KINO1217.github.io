@@ -32,6 +32,8 @@
             function getUserMediaToImg(config,success,error){
                 if(navigator.mediaDevices.getUserMedia){
                     navigator.mediaDevices.getUserMedia(config).then(success).catch(error);
+                }else if(navigator.getUserMedia){
+                    navigator.getUserMedia(config,success,error);
                 }
             }
 
