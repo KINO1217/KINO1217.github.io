@@ -34,6 +34,8 @@
                     navigator.mediaDevices.getUserMedia(config).then(success).catch(error);
                 }else if(navigator.getUserMedia){
                     navigator.getUserMedia(config,success,error);
+                }else if(navigator.webkitGetUserMedia){
+                    navigator.webkitGetUserMedia(config,success,error);
                 }
             }
 
